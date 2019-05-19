@@ -1,0 +1,106 @@
+{% extends 'todos/base.html' %}
+{% block title %}
+<title>My Todos</title>
+{% endblock %}
+{% block content %}
+    <div class="position-absolute w-100 d-flex flex-column p-4">
+    {% for todo in todo_list %}
+        {% if not todo.all_done and todo.is_overdue %}
+
+        <div class="toast ml-auto" role="alert" data-delay="700" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-primary">알림</strong>
+                <small class="text-muted">{{ todo.left_time.days }}일 전</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ todo.title }} is overdue!!
+            </div>
+        </div>
+
+        {% endif %}
+    {% endfor %}
+    </div>
+    <h1> Todos <br></h1>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th>우선순위</th>
+            <th>제목</th>
+            <th>작성날짜</th>
+            <th>마감날짜</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for todo in todo_list %}
+        {% if not todo.all_done and not todo.is_overdue %}
+    <tr onClick="location.href='{% url "todos:detail" todo.id %}'" style="cursor:pointer;">
+        <td>{{ todo.priority }} </td>
+        <td>{{ todo.title }} </td>
+        <td>{{ todo.pub_date }} </td>
+        <td>{{ todo.due_date }} </td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+
+<h1> Dones <br></h1>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th>제목</th>
+            <th>작성날짜</th>
+            <th>마감날짜</th>
+            <th>완료날짜</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for todo in todo_list %}
+        {% if todo.all_done %}
+    <tr onClick="location.href='{% url "todos:detail" todo.id %}'" style="cursor:pointer;">
+        <td>{{ todo.title }} </td>
+        <td>{{ todo.pub_date }} </td>
+        <td>{{ todo.due_date }} </td>
+        <td>{{ todo.done.done_date }}</td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+<h1> Overdue <br></h1>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th>우선순위</th>
+            <th>제목</th>
+            <th>작성날짜</th>
+            <th>마감날짜</th>
+            <th>연체시간</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for todo in todo_list %}
+        {% if todo.is_overdue and not todo.all_done %}
+
+    <tr onClick="location.href='{% url "todos:detail" todo.id %}'" style="cursor:pointer;">
+        <td>{{ todo.priority }} </td>
+        <td>{{ todo.title }} </td>
+        <td>{{ todo.pub_date }} </td>
+        <td>{{ todo.due_date }} </td>
+        <td>{{ todo.left_time }} </td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+<hr/>
+<a class="btn btn-outline-primary center" href="{% url "todos:write" %}">Todo 추가하기</a>
+
+
+{% endblock content %}

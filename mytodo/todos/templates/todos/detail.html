@@ -1,0 +1,40 @@
+{% extends 'todos/base.html' %}
+
+{% block title %}
+    <title>My Todos - todo : {{todo.title}}</title>
+{% endblock %}}
+{% block content %}
+<table class = "table table-light">
+    <thead>
+        <tr>
+            <th>Title : {{ todo.title }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><h5>생성날짜 : {{ todo.pub_date }}  마감날짜 : {{ post.due_date }} </h5></td>
+    </tr>
+    <tr>
+        <td>
+{#            {{ post.content | linebreaks }}#}
+            <form action="{% url 'todos:check' todo.id %}" method="post" id="checked">
+                {% csrf_token %}
+                {% for sub_todo in todo.specific_todo_set.all %}
+                    <input type="checkbox" name="sub_todo" id="sub_todo{{ forloop.counter }}" value="{{ sub_todo.id }}"  {% if sub_todo.is_checked %} checked="checked" {% endif %}>
+                    <label for="sub_todo{{ sub_todo.id }}">
+                    {{ sub_todo.content }}
+                    </label>
+                    <br>
+                {%  endfor %}
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td><input type="submit" class="btn btn-outline-primary" value = "check" form="checked"></td>
+    </tr>
+    <tr>
+        <td><a class="btn btn-outline-primary" href="{% url "todos:edit" todo.id %}">수정</a><a class="btn btn-outline-primary" href="{% url "todos:delete" todo.id %}">삭제</a><a class="btn btn-outline-primary" href="/todos/">목록</a></td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
