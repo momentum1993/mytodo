@@ -1,0 +1,51 @@
+{% extends 'todos/base.html' %}
+
+{% block title %}
+    <title>My Todos - You have to sign in!</title>
+{% endblock %}
+{% block content %}
+
+
+    <h1 style="text-align: center">My Todos 서비스는 로그인 이후 이용가능합니다.<br></h1>
+    <h5 style="text-align: center; color: hotpink">상단의 Navbar 우측에 있는 로그인 버튼을 눌러 로그인 이후 서비스를 이용해주세요</h5>
+
+<h1> Todos <br></h1>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th>우선순위</th>
+            <th>제목</th>
+            <th>작성날짜</th>
+            <th>마감날짜</th>
+        </tr>
+    </thead>
+</table>
+
+
+<h1> Dones <br></h1>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th>제목</th>
+            <th>작성날짜</th>
+            <th>마감날짜</th>
+            <th>완료날짜</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<h1> Overdue <br></h1>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th>우선순위</th>
+            <th>제목</th>
+            <th>작성날짜</th>
+            <th>마감날짜</th>
+            <th>연체시간</th>
+        </tr>
+    </thead>
+</table>
+{% endblock %}

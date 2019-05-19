@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from datetime import datetime
+from django.contrib.auth.models import User
 
 class Todo(models.Model):
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     title = models.CharField(max_length=200)
     priority = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published')
