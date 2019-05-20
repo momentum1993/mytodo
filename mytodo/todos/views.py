@@ -98,16 +98,19 @@ def edit_todo(request, todo_id):
 
             for i in sub_todo_list:
                 if i not in edited_sub_todo_list:
-                    print('1')
                     Specific_todo.objects.get(content=i).delete()
+
+            todo.all_done = True
 
             for i in edited_sub_todo_list:
                 try :
                     Specific_todo.objects.get(content=i)
                 except ObjectDoesNotExist:
-                    print('yes')
                     sub_todo = Specific_todo(todo=todo, content=i, is_checked=False)
                     sub_todo.save()
+                    if todo.all_done:
+                        todo.all_done = False
+            todo.save()
             return HttpResponseRedirect('/')
     else:
         form = TodoForm()
