@@ -73,7 +73,7 @@ def write_todo(request):
             for i in form.data.getlist('sub_todos'):
                 sub_todo = Specific_todo(todo=todo, content=i, is_checked=False)
                 sub_todo.save()
-            return HttpResponseRedirect('/todos/')
+            return HttpResponseRedirect('/')
     else:
         form = TodoForm()
     return render(request, 'todos/write_todo.html', {'form': form,} )
@@ -105,7 +105,7 @@ def edit_todo(request, todo_id):
                     print('yes')
                     sub_todo = Specific_todo(todo=todo, content=i, is_checked=False)
                     sub_todo.save()
-            return HttpResponseRedirect('/todos/')
+            return HttpResponseRedirect('/')
     else:
         form = TodoForm()
     return render(request, 'todos/edit_todo.html', {'form': form, 'todo':todo,} )
