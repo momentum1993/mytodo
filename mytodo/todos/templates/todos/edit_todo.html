@@ -12,7 +12,9 @@ function insRow(value) {
   var oRow = oTbl.insertRow();
   oRow.onmouseover=function(){oTbl.clickedRowIndex=this.rowIndex}; //clickedRowIndex - 클릭한 Row의 위치를 확인;
   var oCell = oRow.insertCell();
-
+  if ( String(value) == 'undefined' ) {
+      value = "";
+  }
   //삽입될 Form Tag
   var frmTag = '<input name="sub_todos" style="white-space: pre" id="sub_todos" type="text" class="form-control" placeholder="sub todo를 입력해주세요" value="'+ value +'">';
   frmTag += '<input type=button style="cursor:hand" value="삭제" onClick="removeRow()"class="btn btn-primary">';
@@ -64,7 +66,9 @@ if($("#sub_todos").val().length==0){ alert("세부 todo들을 입력하세요");
          <td height="25">
            <table id="addTable" width="400" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0">
              {% for sub_todo in todo.specific_todo_set.all %}
+               <tr>
                  <script>insRow("{{ sub_todo.content }}");</script>
+               </tr>
              {% endfor %}
            </table></td>
         </tr>
