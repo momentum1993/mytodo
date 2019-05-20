@@ -55,10 +55,13 @@ def done(request, todo_id):
                 pass
             break
     if all_done:
-        todo.all_done = True
-        d = Done(todo=todo, done_date=timezone.now().replace(microsecond=0))
-        d.save()
-        todo.save()
+        try:
+            todo.done
+        except:
+            todo.all_done = True
+            d = Done(todo=todo, done_date=timezone.now().replace(microsecond=0))
+            d.save()
+            todo.save()
     return render(request, 'todos/index.html', {'todo_list': User.objects.get(username=request.user.username).todo_set.all()})
 
 @login_required
@@ -112,8 +115,11 @@ def edit_todo(request, todo_id):
 
 @login_required
 def delete_todo(request, todo_id):
-    todo = Todo.objects.get(pk=todo_id)
-    todo.delete()
+    try:
+        todo = Todo.objects.get(pk=todo_id)
+        todo.delete()
+    except:
+        pass
     return render(request, 'todos/index.html', {'todo_list': User.objects.get(username=request.user.username).todo_set.all()})
 
 
