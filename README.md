@@ -40,8 +40,9 @@ Done으로 해당 Todo가 옮겨지게 된다.
 ![overdue](./img/overdue.JPG)  
 Todo를 작성하거나 수정할 때 정했던 Due date를 초과시 Overdue로 Todo가 옮겨지며 상단 우측에는 알림이 제공된다.  
 
-## deploy  
+## ~~deploy  
 해당 어플을 AWS를 통해서 배포하였다.  
 아래의 링크를 통해서 해당 웹 어플리케이션을 이용해 볼 수 있다.  
-[http://ec2-13-124-29-161.ap-northeast-2.compute.amazonaws.com:8080](http://ec2-13-124-29-161.ap-northeast-2.compute.amazonaws.com:8080)
+[http://ec2-13-124-29-161.ap-northeast-2.compute.amazonaws.com:8080](http://ec2-13-124-29-161.ap-northeast-2.compute.amazonaws.com:8080)~~  
+현재는 서버를 닫아놓았으며, 이용하고 싶을 경우 다운 받아서 이용하면 됩니다.
 
